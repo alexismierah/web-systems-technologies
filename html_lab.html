@@ -64,45 +64,49 @@
     <form>
         <table>
             <tr>
+                <th colspan = "2">Student Registration Form</th>
+            </tr>
+            <tr>
                 <td><label for="fname">First Name</label></td>
-                <td><input type="text"</td>
+                <td><input type="text" id="fname" name="fname"</td>
             </tr>
             <tr>
                 <td><label for="lname">Last Name</label></td>
-                <td><input type="text"</td>
+                <td><input type="text" id="lname" name="lname"</td>
             </tr>
             <tr>
                 <td><label for="email">Email</label></td>
-                <td><input type="text"</td>
+                <td><input type="text"  id="email" name="email"</td>
             </tr>
             <tr>
                 <td><label for="gender">Gender</label></td>
-                <td><select name="gender">
-                <option>Select an option</option>
-                <option value="male">Male</option>
-                <option value="famale">Female</option>
-                <option value="others">Others</option>
-                </select></td>
+                <td>
+                    <select name="gender">
+                        <option>Select an option</option>
+                        <option value="male">Male</option>
+                        <option value="famale">Female</option>
+                        <option value="others">Others</option>
+                    </select>
+                </td>
             </tr>
             <tr>
                 <td><label for="date of birth">Date of Birth</label></td>
-                <td><input type="text"</td>
+                <td><input type="text"  id="dob" name="dob"</td>
             </tr>
             <tr>
                 <td><label for="address">Address</label></td>
-                <td><input type="text"</td>
+                <td><input type="text"  id="address" name="address"</td>
             </tr>
             <tr>
                 <td><label for="city">City</label></td>
-                <td><input type="text"</td>
+                <td><input type="text"  id="city" name="city"</td>
             </tr>
             <tr>
-                <td><label for="zip code">Zip Code</label></td>
-                <td><input type="text"</td>
+                <td><label for="zip">Zip Code</label></td>
+                <td><input type="text"  id="zip" name="zip"</td>
             </tr>
             <tr>
-                <td><label for="submit"></label></td>
-                <td><button name="submit" value="submit">Submit</button></td>
+                <td colspan="2"><button type="submit">Submit</button></td>
             </tr>
         </table>
     </form>
