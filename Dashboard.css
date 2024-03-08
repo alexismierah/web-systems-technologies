@@ -71,8 +71,9 @@
   
   .main_content .info{
     margin: 20px;
-    color: #717171;
+    color: #000000;
     line-height: 25px;
+    text-align: center;
   }
   
   .main_content .info div{
