@@ -79,3 +79,13 @@
   .main_content .info div{
     margin-bottom: 20px;
   }
+
+  .footer {
+    padding: 10px;
+    text-align: center;
+    background-color:#59575f;
+    color: #fff;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
