@@ -89,3 +89,13 @@
     bottom: 0;
     width: 100%;
 }
+.header.button{
+    padding: 10px 20px;
+    background-color: #4971f3;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 30%; 
+    margin: 0 auto;
+}
