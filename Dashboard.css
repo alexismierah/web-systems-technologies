@@ -10,7 +10,9 @@
   body{
      background-color: #f3f5f9;
   }
-  
+  h1 {
+    text-align: center;
+  }
   .wrapper{
     display: flex;
     position: relative;
@@ -38,7 +40,7 @@
   }    
   
   .wrapper .sidebar ul li a{
-    color: #bdb8d7;
+    color: #ffffff;
     display: block;
   }
   
