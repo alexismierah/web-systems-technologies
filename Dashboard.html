@@ -4,6 +4,12 @@
 	<meta charset="UTF-8">
 	<title>Dashboard</title>
 	<link rel="stylesheet" href="Dashboard.css">
+	<script>
+		function logout() {
+
+			window.location.href = "login.html";
+		}
+	</script>
 </head>
 <body>
 
@@ -21,7 +27,7 @@
         <div class="header">
             <h1>Dashboard</h1>
 
-            <button class="header-button">Logout</button>
+            <button class="header-button" onclick="logout()">Logout</button>
         </div>  
         <div class="info">
           <div><h2>WELCOME, Ronalyn!</h2></div>
