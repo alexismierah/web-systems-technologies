@@ -74,12 +74,12 @@ p {
     position: absolute;
     bottom: 20px;
     left: 20px;
-    padding: 5px 10px; /* Adjust button padding */
+    padding: 5px 10px;
     background-color: #007bff;
     color: #fff;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 14px; /* Adjust button font size */
+    font-size: 14px;
 }
 
 .headerpanel .logout:hover {
