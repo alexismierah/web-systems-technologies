@@ -89,13 +89,16 @@
     bottom: 0;
     width: 100%;
 }
-.header.button{
-    padding: 10px 20px;
-    background-color: #4971f3;
+
+.header-button {
+    background-color: #c0323a;
     color: #fff;
+    padding: 10px 20px;
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
     cursor: pointer;
-    width: 30%; 
-    margin: 0 auto;
+}
+
+.header-button:hover {
+    background-color: #df7278;
 }
