@@ -39,9 +39,11 @@ header {
 }
 
 .main-content {
-    padding: 20px;
+    padding: 10px;
     flex-grow: 1;
     background-color: #f4f4f4;
+    width: 100px;
+    float: right;
 }
 
 footer {
