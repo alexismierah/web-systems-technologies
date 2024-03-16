@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Dashboard</title>
+	<link rel="stylesheet" href="Dashboard.css">
+	<script>
+		function logout() {
+
+			window.location.href = "login.html";
+		}
+	</script>
+</head>
+<body>
+
+<div class="wrapper">
+    <div class="sidebar">
+        <h2>Dashboard</h2>
+        <ul>
+            <li><a href="#"><i class="fas fa-home"></i>Home</a></li> 
+            <li><a href="#"><i class="fas fa-user"></i>Analytics</a></li> 
+            <li><a href="#"><i class="fas fa-address-card"></i>Report</a></li> 
+            <li><a href="#"><i class="fas fa-project-diagram"></i>Settings</a></li>
+        </ul> 
+    </div>
+    <div class="main_content">
+        <div class="header">
+            <h1>Dashboard</h1>
+
+            <button class="header-button" onclick="logout()">Logout</button>
+        </div>  
+        <div class="info">
+          <div><h2>WELCOME, Alexis!</h2></div>
+          <div>Welcome to the dashboard! This is the main content area where you can display various information and charts.</div>
+      </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 Dashboard. All rights reserved.</p>
+    </footer>
+</div>
+
+</body>
+</html>
