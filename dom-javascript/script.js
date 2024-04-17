@@ -33,8 +33,8 @@ document.addEventListener("DOMContentLoaded", function () {
             if (action === 'delete') {
                 row.remove(); // Remove the row from the table
             } else if (action === 'edit') {
-                // Here you can implement editing functionality if needed
-                console.log('Edit action clicked for row:', row);
+                // Call editRow function to handle editing
+                editRow(row);
             }
         }
     });
@@ -56,4 +56,19 @@ function appendValues(name, email, role) {
         </td>
     `;
     tableBody.appendChild(newRow);
+}
+
+// Function to handle editing of table row
+function editRow(row) {
+    const name = row.cells[1].innerText; // Get name from the table cell
+    const email = row.cells[2].innerText; // Get email from the table cell
+    const role = row.cells[3].innerText; // Get role from the table cell
+
+    // Populate the form fields with the row data
+    document.querySelector('input[type="text"]').value = name;
+    document.querySelector('input[type="email"]').value = email;
+    document.getElementById('countries').value = role;
+
+    // Remove the row from the table
+    row.remove();
 }
