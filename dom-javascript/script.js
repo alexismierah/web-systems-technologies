@@ -1,48 +1,42 @@
-// script.js
-
 document.addEventListener("DOMContentLoaded", function () {
-    const form = document.querySelector('form');
-    const tableBody = document.querySelector('tbody');
+    const form = document.getElementById('accountForm');
+    const tableBody = document.querySelector('#userTable tbody');
 
-    // Event listener for form submission
     form.addEventListener('submit', function (event) {
         event.preventDefault(); // Prevent form submission
-        const nameInput = document.querySelector('input[type="text"]');
-        const emailInput = document.querySelector('input[type="email"]');
-        const roleSelect = document.getElementById('countries');
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const roleSelect = document.getElementById('role');
 
-        // Check for empty fields
         if (nameInput.value.trim() === '' || emailInput.value.trim() === '') {
             alert('Please fill out all fields.');
             return;
         }
 
-        // Call appendValues function if validation passes
         appendValues(nameInput.value, emailInput.value, roleSelect.value);
         // Clear the form inputs
         nameInput.value = '';
         emailInput.value = '';
     });
 
-    // Event listener for actions on table rows
     tableBody.addEventListener('click', function (event) {
-        if (event.target.tagName === 'I') { // If the clicked element is an icon
-            const row = event.target.closest('tr');
-            const action = event.target.classList.contains('fa-trash-alt') ? 'delete' : 'edit';
-
+        const target = event.target;
+        if (target.tagName === 'BUTTON') {
+            const action = target.dataset.action;
+            const row = target.closest('tr');
             if (action === 'delete') {
-                row.remove(); // Remove the row from the table
+                row.remove();
             } else if (action === 'edit') {
-                // Call editRow function to handle editing
                 editRow(row);
+            } else if (action === 'save') {
+                saveRow(row);
             }
         }
     });
 });
 
-// Function to append values to the table
 function appendValues(name, email, role) {
-    const tableBody = document.querySelector('tbody');
+    const tableBody = document.querySelector('#userTable tbody');
     const newRow = document.createElement('tr');
 
     newRow.innerHTML = `
@@ -51,24 +45,41 @@ function appendValues(name, email, role) {
         <td class="border p-2">${email}</td>
         <td class="border p-2">${role}</td>
         <td class="border p-2">
-            <button class="text-blue-500 p-1"><i class="fas fa-edit"></i></button>
-            <button class="text-red-500 p-1"><i class="fas fa-trash-alt"></i></button>
+            <button class="text-blue-500 p-1" data-action="edit"><i class="fas fa-edit"></i></button>
+            <button class="text-red-500 p-1" data-action="delete"><i class="fas fa-trash-alt"></i></button>
         </td>
     `;
     tableBody.appendChild(newRow);
 }
 
-// Function to handle editing of table row
 function editRow(row) {
-    const name = row.cells[1].innerText; // Get name from the table cell
-    const email = row.cells[2].innerText; // Get email from the table cell
-    const role = row.cells[3].innerText; // Get role from the table cell
+    const cells = row.cells;
+    const name = cells[1].innerText;
+    const email = cells[2].innerText;
+    const role = cells[3].innerText;
 
-    // Populate the form fields with the row data
-    document.querySelector('input[type="text"]').value = name;
-    document.querySelector('input[type="email"]').value = email;
-    document.getElementById('countries').value = role;
+    cells[1].innerHTML = `<input type="text" class="border rounded p-1" value="${name}">`;
+    cells[2].innerHTML = `<input type="email" class="border rounded p-1" value="${email}">`;
+    cells[3].innerHTML = `<select class="border rounded p-1"><option value="Admin" ${role === 'Admin' ? 'selected' : ''}>Admin</option><option value="User" ${role === 'User' ? 'selected' : ''}>User</option></select>`;
 
-    // Remove the row from the table
-    row.remove();
+    const actionsCell = cells[4];
+    const editButton = actionsCell.querySelector('button[data-action="edit"]');
+    editButton.innerHTML = '<i class="fas fa-save"></i>';
+    editButton.dataset.action = 'save';
+}
+
+function saveRow(row) {
+    const cells = row.cells;
+    const name = cells[1].querySelector('input').value;
+    const email = cells[2].querySelector('input').value;
+    const role = cells[3].querySelector('select').value;
+
+    cells[1].innerHTML = name;
+    cells[2].innerHTML = email;
+    cells[3].innerHTML = role;
+
+    const actionsCell = cells[4];
+    const saveButton = actionsCell.querySelector('button[data-action="save"]');
+    saveButton.innerHTML = '<i class="fas fa-edit"></i>';
+    saveButton.dataset.action = 'edit';
 }
