@@ -39,6 +39,9 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
     });
+
+    // Load saved values from localStorage on page load
+    loadSavedValues();
 });
 
 // Function to append values to the table
@@ -57,6 +60,9 @@ function appendValues(name, email, role) {
         </td>
     `;
     tableBody.appendChild(newRow);
+
+    // Save the new values to localStorage
+    saveValuesToLocalStorage();
 }
 
 // Function to handle editing of table row
@@ -93,9 +99,45 @@ function saveRow(row) {
     const saveButton = actionsCell.querySelector('button[data-action="save"]');
     saveButton.innerHTML = '<i class="fas fa-edit"></i>';
     saveButton.dataset.action = 'edit';
+
+    // Save the updated values to localStorage
+    saveValuesToLocalStorage();
 }
 
 // Function to delete row
 function deleteRow(row) {
     row.remove();
+
+    // Save the updated values to localStorage
+    saveValuesToLocalStorage();
+}
+
+// Function to save values to localStorage
+function saveValuesToLocalStorage() {
+    const tableBody = document.querySelector('#userTable tbody');
+    const rows = tableBody.querySelectorAll('tr');
+
+    const data = [];
+    rows.forEach(row => {
+        const cells = row.cells;
+        const rowData = {
+            name: cells[1].innerText,
+            email: cells[2].innerText,
+            role: cells[3].innerText
+        };
+        data.push(rowData);
+    });
+
+    localStorage.setItem('userTableData', JSON.stringify(data));
+}
+
+// Function to load saved values from localStorage
+function loadSavedValues() {
+    const savedData = localStorage.getItem('userTableData');
+    if (savedData) {
+        const data = JSON.parse(savedData);
+        data.forEach(rowData => {
+            appendValues(rowData.name, rowData.email, rowData.role);
+        });
+    }
 }
