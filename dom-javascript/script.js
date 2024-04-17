@@ -2,11 +2,13 @@ document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById('accountForm');
     const tableBody = document.querySelector('#userTable tbody');
 
+
     form.addEventListener('submit', function (event) {
-        event.preventDefault(); // Prevent form submission
+        event.preventDefault();
         const nameInput = document.getElementById('name');
         const emailInput = document.getElementById('email');
         const roleSelect = document.getElementById('role');
+
 
         if (nameInput.value.trim() === '' || emailInput.value.trim() === '') {
             alert('Please fill out all fields.');
@@ -33,8 +35,6 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
     });
-
-    loadSavedValues();
 });
 
 function appendValues(name, email, role) {
@@ -52,8 +52,6 @@ function appendValues(name, email, role) {
         </td>
     `;
     tableBody.appendChild(newRow);
-
-    saveValuesToLocalStorage();
 }
 
 function editRow(row) {
@@ -86,40 +84,7 @@ function saveRow(row) {
     const saveButton = actionsCell.querySelector('button[data-action="save"]');
     saveButton.innerHTML = '<i class="fas fa-edit"></i>';
     saveButton.dataset.action = 'edit';
-
-    saveValuesToLocalStorage();
 }
-
 function deleteRow(row) {
     row.remove();
-
-    saveValuesToLocalStorage();
-}
-
-function saveValuesToLocalStorage() {
-    const tableBody = document.querySelector('#userTable tbody');
-    const rows = tableBody.querySelectorAll('tr');
-
-    const data = [];
-    rows.forEach(row => {
-        const cells = row.cells;
-        const rowData = {
-            name: cells[1].innerText,
-            email: cells[2].innerText,
-            role: cells[3].innerText
-        };
-        data.push(rowData);
-    });
-
-    localStorage.setItem('userTableData', JSON.stringify(data));
-}
-
-function loadSavedValues() {
-    const savedData = localStorage.getItem('userTableData');
-    if (savedData) {
-        const data = JSON.parse(savedData);
-        data.forEach(rowData => {
-            appendValues(rowData.name, rowData.email, rowData.role);
-        });
-    }
 }
