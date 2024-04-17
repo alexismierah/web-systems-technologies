@@ -1,30 +1,24 @@
-// script.js
-
 document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById('accountForm');
     const tableBody = document.querySelector('#userTable tbody');
 
-    // Event listener for form submission
     form.addEventListener('submit', function (event) {
         event.preventDefault(); // Prevent form submission
         const nameInput = document.getElementById('name');
         const emailInput = document.getElementById('email');
         const roleSelect = document.getElementById('role');
 
-        // Check for empty fields
         if (nameInput.value.trim() === '' || emailInput.value.trim() === '') {
             alert('Please fill out all fields.');
             return;
         }
 
-        // Call appendValues function if validation passes
         appendValues(nameInput.value, emailInput.value, roleSelect.value);
-        // Clear the form inputs
+
         nameInput.value = '';
         emailInput.value = '';
     });
 
-    // Event listener for actions on table rows
     tableBody.addEventListener('click', function (event) {
         const target = event.target;
         if (target.tagName === 'BUTTON') {
@@ -40,11 +34,9 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Load saved values from localStorage on page load
     loadSavedValues();
 });
 
-// Function to append values to the table
 function appendValues(name, email, role) {
     const tableBody = document.querySelector('#userTable tbody');
     const newRow = document.createElement('tr');
@@ -61,11 +53,9 @@ function appendValues(name, email, role) {
     `;
     tableBody.appendChild(newRow);
 
-    // Save the new values to localStorage
     saveValuesToLocalStorage();
 }
 
-// Function to handle editing of table row
 function editRow(row) {
     const cells = row.cells;
     const name = cells[1].innerText;
@@ -76,14 +66,12 @@ function editRow(row) {
     cells[2].innerHTML = `<input type="email" class="border rounded p-1" value="${email}">`;
     cells[3].innerHTML = `<select class="border rounded p-1"><option value="Admin" ${role === 'Admin' ? 'selected' : ''}>Admin</option><option value="User" ${role === 'User' ? 'selected' : ''}>User</option></select>`;
 
-    // Change the action button to "Save"
     const actionsCell = cells[4];
     const editButton = actionsCell.querySelector('button[data-action="edit"]');
     editButton.innerHTML = '<i class="fas fa-save"></i>';
     editButton.dataset.action = 'save';
 }
 
-// Function to save edited row
 function saveRow(row) {
     const cells = row.cells;
     const name = cells[1].querySelector('input').value;
@@ -94,25 +82,20 @@ function saveRow(row) {
     cells[2].innerHTML = email;
     cells[3].innerHTML = role;
 
-    // Change the action button back to "Edit"
     const actionsCell = cells[4];
     const saveButton = actionsCell.querySelector('button[data-action="save"]');
     saveButton.innerHTML = '<i class="fas fa-edit"></i>';
     saveButton.dataset.action = 'edit';
 
-    // Save the updated values to localStorage
     saveValuesToLocalStorage();
 }
 
-// Function to delete row
 function deleteRow(row) {
     row.remove();
 
-    // Save the updated values to localStorage
     saveValuesToLocalStorage();
 }
 
-// Function to save values to localStorage
 function saveValuesToLocalStorage() {
     const tableBody = document.querySelector('#userTable tbody');
     const rows = tableBody.querySelectorAll('tr');
@@ -131,7 +114,6 @@ function saveValuesToLocalStorage() {
     localStorage.setItem('userTableData', JSON.stringify(data));
 }
 
-// Function to load saved values from localStorage
 function loadSavedValues() {
     const savedData = localStorage.getItem('userTableData');
     if (savedData) {
